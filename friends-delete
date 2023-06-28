@@ -1,0 +1,22 @@
+CREATE proc [dbo].[Friends_Delete]
+	@Id int  
+
+as
+
+/*
+	Declare @Id int = 2
+
+	Execute dbo.Friends_Delete @Id
+
+*/
+
+BEGIN
+
+	DELETE FROM [dbo].[Friends]
+	Where Id=@Id
+
+
+END
+GO
+
+
