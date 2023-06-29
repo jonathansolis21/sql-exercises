@@ -1,0 +1,89 @@
+CREATE proc [dbo].[Friends_InsertV3]
+     @Title nvarchar(120)
+    ,@Bio nvarchar(700)   
+    ,@Summary nvarchar(255) 
+    ,@Headline nvarchar(80) 
+    ,@Slug nvarchar(100) 
+    ,@StatusId int
+    ,@TypeId int
+    ,@Url nvarchar(128)
+    ,@batchSkills [SkillsUdt] READONLY 
+
+as
+
+/*
+Declare 
+		@Title nvarchar(120) = 'Patrick Beverly'  
+		,@Bio nvarchar(700) = 'Pesky dude. Will go all out for your team.'
+		,@Summary nvarchar(255) = 'Pesky dude.'
+		,@Headline nvarchar(80) = 'Walk it like i talk it.'
+		,@Slug nvarchar(100) = 'www.patrickbeverly.com' 
+		,@StatusId int = 1
+		,@TypeId int = 2543
+		,@Url nvarchar(128) = 'https://icons.iconarchive.com/icons/sykonist/peter-griffin/256/Peter-Griffen-Tux-icon.png' 
+		, @batchSkills SkillsUdt 
+
+		INSERT into @batchSkills ( SkillName ) 
+		Values ( 'Beatboxing' )
+		INSERT into @batchSkills ( SkillName ) 
+		Values ( 'Rapping' )
+		INSERT into @batchSkills ( SkillName ) 
+		Values ( 'Breakdancing' )
+
+	Execute dbo.Friends_InsertV3 
+		@Title
+		,@Bio
+		,@Summary
+		,@Headline
+		,@Slug
+		,@StatusId
+		,@TypeId
+		,@Url
+		,@batchSkills
+*/
+
+BEGIN
+	
+	DECLARE @ImageId int
+
+	INSERT INTO dbo.Images 
+    ([TypeId]
+    , [Url])
+	VALUES (@TypeId
+    ,@Url)											
+																																																			
+	DECLARE @LatestImageId as int = SCOPE_IDENTITY()	
+
+	INSERT INTO dbo.Friends (Title
+    ,Bio
+    ,Summary
+    ,Headline 
+    ,Slug
+    ,StatusId 
+    ,PrimaryImageId)
+  VALUES	(@Title
+    ,@Bio
+    ,@Summary
+    ,@Headline
+    ,@Slug
+    ,@StatusId
+    ,@LatestImageId)
+	
+	DECLARE @LatestFriendId as int = SCOPE_IDENTITY()				 
+
+	DECLARE @Skills TABLE (SkillTableId int) 
+	
+	INSERT INTO dbo.Skills (SkillName)
+	OUTPUT Inserted.SkillTableId into @Skills
+	SELECT b.SkillName
+	FROM @batchSkills as b
+​
+	INSERT INTO dbo.FriendSkill 
+    ([FriendId]
+    , [SkillId])
+	
+	Select @LatestFriendId
+    , s.SkillTableId
+	FROM @Skills as s 
+	
+	END 
