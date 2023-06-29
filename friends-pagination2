@@ -1,0 +1,41 @@
+CREATE proc [dbo].[Friends_PaginationV2]
+
+  @Index int 
+	,@PageSize int
+
+AS
+
+/*
+  Declare
+		@Index int = 0
+		,@PageSize int = 2
+
+  Execute dbo.Friends_PaginationV2
+*/
+
+BEGIN
+
+  Declare @offset int = @Index * @PageSize 
+
+  SELECT 
+		f.Id
+		,f.Title
+		,f.Bio
+		,f.Summary
+		,f.Headline
+		,f.Slug
+		,f.StatusId
+		, f.PrimaryImageId  
+		,f.DateCreated
+		,f.DateModified
+		,i.TypeId
+		,i.Url 
+
+		FROM dbo.Friends as f inner join dbo.Images as i
+			on f.PrimaryImageId = i.Id
+    ORDER BY Id
+
+	OFFSET @offSet Rows
+	Fetch Next @PageSize Rows ONLY
+
+END
