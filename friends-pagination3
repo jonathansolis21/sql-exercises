@@ -1,0 +1,55 @@
+CREATE proc [dbo].[Friends_PaginationV3]
+
+  @PageIndex int 
+	,@PageSize int
+
+AS
+
+/*
+	Declare
+		@PageIndex int = 0
+		,@PageSize int = 2
+
+	Execute dbo.Friends_PaginationV3
+	  @PageIndex
+		,@PageSize
+*/
+
+BEGIN
+
+   Declare @offset int = @PageIndex * @PageSize 
+
+  SELECT 
+		f.Id
+		,f.Title
+		,f.Bio
+		,f.Summary
+		,f.Headline
+		,f.Slug
+		,f.StatusId
+		, f.PrimaryImageId  
+		,f.DateCreated
+		,f.DateModified
+		,i.TypeId
+		,i.Url 
+		,Skills = (
+		
+				select s.SkillTableId as skillId
+				,s.SkillName as skillName
+
+				from dbo.Skills as s
+				inner join dbo.FriendSkill as fs
+				on s.SkillTableId = fs.SkillId
+
+				where fs.FriendId = f.Id
+				for JSON AUTO )
+
+		, TotalCount = COUNT(1) OVER() 
+		FROM dbo.Friends as f inner join dbo.Images as i
+			on f.PrimaryImageId = i.Id
+    ORDER BY Id
+
+	OFFSET @offSet Rows
+	Fetch Next @PageSize Rows ONLY
+
+END
