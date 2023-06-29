@@ -1,0 +1,61 @@
+CREATE proc [dbo].[Friends_Search_PaginationV3]
+
+		@PageIndex int
+		,@PageSize int
+		,@Query nvarchar(100) 
+
+as
+
+/*
+  DECLARE
+    @PageIndex int = 0 
+    , @PageSize int = 5
+    , @Query nvarchar(100) = 'bart'
+  
+  Execute dbo.Friends_Search_PaginationV3
+  	@PageIndex
+  	,@PageSize
+  	,@Query
+*/
+
+BEGIN
+
+DECLARE @Offset int = @PageIndex * @PageSize
+
+	SELECT 	f.Id
+		,f.Title
+		,f.Bio
+		,f.Summary
+		,f.Headline
+		,f.Slug
+		,f.StatusId		
+		, f.PrimaryImageId  
+		,f.DateCreated
+		,f.DateModified
+		,i.TypeId
+		,i.Url
+		,Skills = (
+		
+				select s.SkillTableId as skillId
+				,s.SkillName as skillName
+
+				from dbo.Skills as s
+				inner join dbo.FriendSkill as fs
+				on s.SkillTableId = fs.SkillId
+
+				where fs.FriendId = f.Id
+				for JSON AUTO )
+
+	      , TotalCount = COUNT(1) OVER() 
+  FROM dbo.Friends as f inner join dbo.Images as i
+		on f.PrimaryImageId = i.Id
+
+  WHERE (Title LIKE '%' + @Query + '%')
+  ORDER BY Id
+  OFFSET @Offset ROWS
+  FETCH NEXT @PageSize ROWS ONLY
+
+ END
+
+
+
