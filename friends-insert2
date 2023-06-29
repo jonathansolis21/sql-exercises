@@ -1,0 +1,65 @@
+CREATE proc [dbo].[Friends_InsertV2]
+
+		@Id int
+		,@Title nvarchar(120)
+		,@Bio nvarchar(700)   
+		,@Summary nvarchar(255) 
+		,@Headline nvarchar(80) 
+		,@Slug nvarchar(100) 
+		,@StatusId int
+		,@TypeId int
+		,@Url nvarchar(128)            
+as
+
+/*
+Declare 
+		@Id int
+		,@Title nvarchar(120) = 'Coach Nart'
+		,@Bio nvarchar(700)  = 'Summary line goes here. Then the rest of the bio'
+		,@Summary nvarchar(255) = 'Summary line goes here.'
+		,@Headline nvarchar(80) = 'Headline would be shorter and cooler.'
+		,@Slug nvarchar(100) = 'www.coachnart.com'
+		,@StatusId int = 131313
+		,@TypeId int = 1313
+		,@Url nvarchar(128) = 'https://icons.iconarchive.com/icons/sykonist/peter-griffin/256/Peter-Griffen-Tux-icon.png' 
+
+Execute dbo.Friends_InsertV2
+						@Id
+						,@Title  
+						,@Bio
+						,@Summary
+						,@Headline
+						,@Slug
+						,@StatusId
+						,@TypeId
+						,@Url 
+*/
+
+BEGIN
+
+
+	INSERT INTO dbo.Images
+			(TypeId
+			,Url)
+	VALUES (@TypeId
+			,@Url)
+ 
+	SELECT @Id = SCOPE_IDENTITY()
+
+	INSERT INTO dbo.Friends 
+      (Title
+      ,Bio
+      ,Summary
+      ,Headline 
+      ,Slug
+      ,StatusId 
+      ,PrimaryImageId)
+	VALUES (@Title
+			,@Bio
+			,@Summary
+			,@Headline
+			,@Slug
+			,@StatusId
+			,@Id)
+
+	END 
