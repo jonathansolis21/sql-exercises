@@ -1,0 +1,48 @@
+CREATE proc [dbo].[Friends_Search_Pagination]
+
+		@PageIndex int
+		,@PageSize int
+		,@Query nvarchar(100) 
+
+as
+
+/*
+  DECLARE
+    @PageIndex int = 0 
+    , @PageSize int = 5
+    , @Query nvarchar(100) = 'cart'
+  
+  Execute dbo.Friends_Search_Pagination
+  	@PageIndex
+  	,@PageSize
+  	,@Query
+  
+  select * from dbo.Friends 
+*/
+
+BEGIN
+
+DECLARE @Offset int = @PageIndex * @PageSize
+
+	SELECT [Id]
+      ,[Title]
+      ,[Bio]
+      ,[Summary]
+      ,[Headline]
+      ,[Slug]
+	    ,[StatusId]
+	    ,[PrimaryImageId]
+      ,[DateCreated]
+      ,[DateModified]
+	    , TotalCount = COUNT(1) OVER() 
+  FROM [dbo].[Friends]
+
+  WHERE (Title LIKE '%' + @Query + '%')
+  ORDER BY Id
+  OFFSET @Offset ROWS
+  FETCH NEXT @PageSize ROWS ONLY
+
+ END
+
+
+
