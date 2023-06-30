@@ -1,0 +1,56 @@
+CREATE proc [dbo].[Friends_Update]
+
+		@Id int 
+		,@Title nvarchar(120)
+		,@Bio nvarchar(700)   
+		,@Summary nvarchar(255) 
+		,@Headline nvarchar(80) 
+		,@Slug nvarchar(100) 
+		,@StatusId int
+		,@PrimaryImageId int
+as
+
+/*
+	Declare
+		@Id int = 89
+		,@Title nvarchar(120) = 'Coach Oart'
+		,@Bio nvarchar(700)   = 'Oart summary line. Then the rest of bio.'
+		,@Summary nvarchar(255) = 'Oart line goes here.'
+		,@Headline nvarchar(80) = 'Coach Oart headline'
+		,@Slug nvarchar(100) = 'www.coachoart.com'
+		,@StatusId int = 1414
+		,@PrimaryImageId int = 1
+
+Execute dbo.Friends_Update 
+		@Id
+		,@Title 
+		,@Bio    
+		,@Summary 
+		,@Headline 
+		,@Slug 
+		,@StatusId 
+		,@PrimaryImageId 	
+*/
+
+BEGIN
+
+	Declare @dateNow datetime2 = GETUTCDATE(); 
+
+	UPDATE [dbo].[Friends]
+  
+  SET 
+		Title= @Title 
+		,Bio = @Bio    
+		,Summary=@Summary 
+		,Headline=@Headline 
+		,Slug=@Slug 
+		,StatusId=@StatusId 
+		,PrimaryImageId=@PrimaryImageId 
+		,DateModified = @dateNow
+    
+	WHERE Id = @Id
+
+END
+
+
+
