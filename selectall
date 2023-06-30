@@ -8,32 +8,30 @@ as
 */
 
 BEGIN
-
 	
 	SELECT [Id]
 		,[Title]
-		, [Bio]
-		, [Summary]
-		, [Headline]
-		, [Slug]
-		, [StatusId]
-		, [PrimaryImageId]
+		,[Bio]
+		,[Summary]
+		,[Headline]
+		,[Slug]
+		,[StatusId]
+		,[PrimaryImageId]
 		,[DateCreated]
 		,[DateModified]
 		,Skills = (
 		
-				select s.SkillTableId as skillId
-				,s.SkillName as skillName
+			select s.SkillTableId as skillId
+			,s.SkillName as skillName
 
-				from dbo.Skills as s
-				inner join dbo.FriendSkill as fs
-				on s.SkillTableId = fs.SkillId
+			from dbo.Skills as s
+			inner join dbo.FriendSkill as fs
+			on s.SkillTableId = fs.SkillId
 
-				where fs.FriendId = f.Id
-				for JSON AUTO )
-
+			where fs.FriendId = f.Id
+			for JSON AUTO )
+	
 	FROM [dbo].[Friends] as f 
-
 
 END
 
