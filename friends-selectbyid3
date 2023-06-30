@@ -1,0 +1,57 @@
+CREATE proc [dbo].[Friends_SelectByIdV3]
+
+@Id int 
+
+as 
+
+/*
+	Declare @Id int=2; 
+
+	Execute dbo.Friends_SelectByIdV3 @Id
+
+	SELECT * FROM FriendSkill
+
+	Insert Into FriendSkill (FriendId, SkillId) VALUES (2, 3)
+*/
+
+BEGIN
+
+	
+	SELECT 
+		f.Id
+		,f.Title
+		,f.Bio
+		,f.Summary
+		,f.Headline
+		,f.Slug
+		,f.StatusId
+		,f.PrimaryImageId
+		,f.DateCreated
+		,f.DateModified
+		,i.TypeId
+		,i.Url 
+		,Skills = (
+		
+				select s.SkillTableId as skillId
+				,s.SkillName as skillName
+
+				from dbo.Skills as s
+				inner join dbo.FriendSkill as fs
+				on s.SkillTableId = fs.SkillId
+
+				where fs.FriendId = f.Id
+				for JSON AUTO )
+
+	FROM dbo.Friends as f 
+		
+		inner join dbo.Images as i
+		on f.PrimaryImageId = i.Id
+
+		Where f.Id = @Id
+
+
+END
+
+GO
+
+
