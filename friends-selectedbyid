@@ -1,0 +1,42 @@
+CREATE proc [dbo].[Friends_SelectById]
+		@Id int
+
+as 
+
+/*
+	Declare @Id int=7; 
+
+	Execute dbo.Friends_SelectById @Id               
+*/
+
+BEGIN
+
+	
+	SELECT [Id]
+		,[Title]
+		,[Bio]
+		,[Summary]
+		,[Headline]
+		,[Slug]
+		,[StatusId]
+		,[PrimaryImageId]
+		,[DateCreated]
+		,[DateModified]
+		,Skills = 
+				
+				( select s.SkillTableId as skillId
+				,s.SkillName as skillName
+
+				from dbo.Skills as s
+						inner join dbo.FriendSkill as fs
+						on fs.SkillId = s.SkillTableId   
+
+				where fs.FriendId = f.Id
+				for JSON AUTO )
+
+	FROM [dbo].[Friends] as f 
+	Where Id = @Id
+
+END
+
+
