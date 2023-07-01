@@ -1,0 +1,44 @@
+CREATE proc [dbo].[Images_Insert]
+
+		@Id int 
+		,@TypeId int 
+		, @Url nvarchar(128) 
+
+as
+
+/*
+
+Declare @Id int = 0; 
+
+	Declare 
+		@TypeId int = '1212'
+		,@Url nvarchar(128) = 'https://static.wikia.nocookie.net/pjdn/images/d/d0/Slider_Steves.jpg/revision/latest/scale-to-width-down/700?cb=20180127224108'
+
+Execute dbo.Images_Insert 
+		@Id
+		,@TypeId
+		,@Url
+
+	 
+
+
+*/
+
+BEGIN
+
+	
+	INSERT INTO [dbo].[Images]
+		   ([TypeId]
+		   ,[Url])
+
+     VALUES
+			(@TypeId
+			,@Url)
+
+	SET @Id = SCOPE_IDENTITY()
+
+END
+
+
+
+
