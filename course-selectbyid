@@ -1,0 +1,46 @@
+CREATE proc [dbo].[Course_SelectById]
+		
+		@Id int
+
+as 
+
+/*
+	Declare @Id int=4; 
+
+	Execute dbo.Course_SelectById @Id    
+*/
+
+BEGIN
+
+	
+	SELECT distinct c.[Id]
+		,c.[Name]
+		,c.Description
+		,st.Season
+		,t.Teacher
+		,Students = (
+				select s.[Name] as [Name]
+
+				from dbo.Student as s
+				inner join dbo.StudentCourses as sc    
+				on s.Id = sc.StudentId
+
+				where sc.CourseId = @Id
+				for JSON AUTO 
+					)
+
+	FROM  [dbo].[Course] as c
+		inner join StudentCourses as sc
+		on sc.CourseId = c.Id 
+		inner join SeasonTerms as st 
+		on st.Id = c.SeasonTermId 
+		inner join Teacher as t
+		on t.Id = c.TeacherId
+
+		where c.Id = @Id 
+
+END
+
+
+
+
