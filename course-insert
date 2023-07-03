@@ -1,22 +1,22 @@
-CREATE proc [dbo].[Courses_Insert]
+CREATE proc [dbo].[Course_Insert]
 
-		@Id int OUTPUT
-		,@Name nvarchar(128)
-		,@Description nvarchar(128)   
-		,@SeasonTermId int
-		,@TeacherId int
+	@Id int OUTPUT
+	,@Name nvarchar(128)
+	,@Description nvarchar(128)   
+	,@SeasonTermId int
+	,@TeacherId int
         
 as
 
 /*
-Declare 
+	Declare 
 		@Id int OUTPUT
 		,@Name nvarchar(128) = 'Calculus'
 		,@Description nvarchar(128)  = 'A study of Calculus' 
 		,@SeasonTermId int = 2
 		,@TeacherId int = 1
 
-Execute dbo.Courses_Insert
+	Execute dbo.Course_Insert
 		@Id 
 		,@Name
 		,@Description  
@@ -27,9 +27,9 @@ Execute dbo.Courses_Insert
 BEGIN
 
 	INSERT INTO dbo.Course ([Name]
-    ,[Description]
-    ,SeasonTermId
-    ,TeacherId)
+		,[Description]
+		,SeasonTermId
+		,TeacherId)
   
 	VALUES 
 		(@Name 
@@ -39,4 +39,4 @@ BEGIN
 
 		SET @Id = SCOPE_IDENTITY()
 
-	END 
+END 
