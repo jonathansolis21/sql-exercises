@@ -1,0 +1,42 @@
+CREATE proc [dbo].[Courses_Insert]
+
+		@Id int OUTPUT
+		,@Name nvarchar(128)
+		,@Description nvarchar(128)   
+		,@SeasonTermId int
+		,@TeacherId int
+        
+as
+
+/*
+Declare 
+		@Id int OUTPUT
+		,@Name nvarchar(128) = 'Calculus'
+		,@Description nvarchar(128)  = 'A study of Calculus' 
+		,@SeasonTermId int = 2
+		,@TeacherId int = 1
+
+Execute dbo.Courses_Insert
+		@Id 
+		,@Name
+		,@Description  
+		,@SeasonTermId 
+		,@TeacherId 
+*/
+
+BEGIN
+
+	INSERT INTO dbo.Course ([Name]
+    ,[Description]
+    ,SeasonTermId
+    ,TeacherId)
+  
+	VALUES 
+		(@Name 
+		,@Description 
+		,@SeasonTermId
+		,@TeacherId) 
+
+		SET @Id = SCOPE_IDENTITY()
+
+	END 
