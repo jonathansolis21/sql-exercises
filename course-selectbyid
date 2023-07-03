@@ -1,6 +1,6 @@
 CREATE proc [dbo].[Course_SelectById]
 		
-		@Id int
+	@Id int
 
 as 
 
@@ -19,15 +19,15 @@ BEGIN
 		,st.Season
 		,t.Teacher
 		,Students = (
-				select s.[Name] as [Name]
+			select s.[Name] as [Name]
 
-				from dbo.Student as s
-				inner join dbo.StudentCourses as sc    
-				on s.Id = sc.StudentId
+			from dbo.Student as s
+			inner join dbo.StudentCourses as sc    
+			on s.Id = sc.StudentId
 
-				where sc.CourseId = @Id
-				for JSON AUTO 
-					)
+			where sc.CourseId = @Id
+			for JSON AUTO 
+				)
 
 	FROM  [dbo].[Course] as c
 		inner join StudentCourses as sc
