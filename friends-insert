@@ -1,13 +1,13 @@
 CREATE PROC [dbo].[Friends_Insert]
 
-		@Id int OUTPUT
-		,@Title nvarchar(120)
-		,@Bio nvarchar(700)   
-		,@Summary nvarchar(255) 
-		,@Headline nvarchar(80) 
-		,@Slug nvarchar(100) 
-		,@StatusId int
-		,@PrimaryImageId int
+	@Id int OUTPUT
+	,@Title nvarchar(120)
+	,@Bio nvarchar(700)   
+	,@Summary nvarchar(255) 
+	,@Headline nvarchar(80) 
+	,@Slug nvarchar(100) 
+	,@StatusId int
+	,@PrimaryImageId int
 
 as
 
@@ -15,46 +15,46 @@ as
 
 Declare @Id int = 0; 
 
-	Declare @Title nvarchar(120) = 'Bobby Wagner'
-		,@Bio nvarchar(700)  = 'Summary line goes here. Then the rest of the bio'
-		,@Summary nvarchar(255) = 'Summary line goes here.'
-		,@Headline nvarchar(80) = 'Headline would be shorter and cooler.'
-		,@Slug nvarchar(100) = 'www.bobbywagner.com'
-		,@StatusId int = 1313
-		,@PrimaryImageId int = 1
+Declare @Title nvarchar(120) = 'Bobby Wagner'
+	,@Bio nvarchar(700)  = 'Summary line goes here. Then the rest of the bio'
+	,@Summary nvarchar(255) = 'Summary line goes here.'
+	,@Headline nvarchar(80) = 'Headline would be shorter and cooler.'
+	,@Slug nvarchar(100) = 'www.bobbywagner.com'
+	,@StatusId int = 1313
+	,@PrimaryImageId int = 1
 
 Execute dbo.Friends_Insert 
-						@Id
-						,@Title
-						,@Bio
-						,@Summary
-						,@Headline
-						,@Slug
-						,@StatusId
-						,@PrimaryImageId
+	@Id
+	,@Title
+	,@Bio
+	,@Summary
+	,@Headline
+	,@Slug
+	,@StatusId
+	,@PrimaryImageId
 
 */
 
 BEGIN
 
 	
-	INSERT INTO [dbo].[Friends]
-			([Title]
-      ,[Bio]
-      ,[Summary]
-      ,[Headline]
-		  ,[Slug]
-		  ,[StatusId]
-		  ,[PrimaryImageId])
+INSERT INTO [dbo].[Friends]
+	([Title]
+      	,[Bio]
+      	,[Summary]
+      	,[Headline]
+	,[Slug]
+	,[StatusId]
+	,[PrimaryImageId])
 
   VALUES
-			(@Title
-			,@Bio
-			,@Summary
-			,@Headline
-			,@Slug
-			,@StatusId
-			,@PrimaryImageId)
+	(@Title
+	,@Bio
+	,@Summary
+	,@Headline
+	,@Slug
+	,@StatusId
+	,@PrimaryImageId)
 
 	SET @Id = SCOPE_IDENTITY()
 
