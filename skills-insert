@@ -1,0 +1,30 @@
+CREATE proc [dbo].[Skills_Insert]
+
+		@SkillTableId int 
+		,@SkillName nvarchar(128) 
+
+as
+
+/*
+  Declare 
+		@SkillTableId int = 0
+		,@SkillName nvarchar(128) = 'Singing '
+
+  Execute dbo.Skills_Insert 
+		@SkillTableId
+		,@SkillName 
+*/
+
+BEGIN
+	
+  INSERT INTO [dbo].Skills
+		   (
+		   SkillName)
+
+  VALUES
+			(
+			 @SkillName)
+
+	SET @SkillTableId = SCOPE_IDENTITY()
+
+END
