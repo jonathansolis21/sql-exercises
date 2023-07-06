@@ -1,0 +1,30 @@
+CREATE proc [dbo].[Skills_BatchInsert]
+
+		@batchSkills [SkillsUdt] READONLY 
+
+as
+
+/*
+DECLARE @batchSkills SkillsUdt  
+
+		INSERT into @batchSkills ( SkillName ) 
+		Values ( 'Kicking' )
+		INSERT into @batchSkills ( SkillName ) 
+		Values ( 'Punching' )
+		INSERT into @batchSkills ( SkillName ) 
+		Values ( 'Elbowing' )
+
+	Execute dbo.Skills_BatchInsert
+		@batchSkills
+*/
+
+BEGIN
+
+--DECLARE @Skills TABLE (SkillTableId int) 
+
+	INSERT INTO Skills (SkillName)
+	
+	SELECT b.SkillName
+	FROM @batchSkills as b
+
+END
