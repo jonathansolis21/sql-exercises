@@ -1,0 +1,53 @@
+CREATE PROC [dbo].[Presidents_Insert]
+
+		@FirstName nvarchar(50)
+		,@LastName nvarchar(50)
+		,@InaugurationDate datetime2(7)
+		,@FirstYearInOffice int
+		,@LastYearInOffice int
+		,@PartyAffiliation nvarchar(50) 
+		,@Id int 
+
+as
+
+/*
+  Declare @Id int = 0; 
+
+	Declare @FirstName nvarchar(50) = 'Jonny'
+		,@LastName nvarchar(50) = 'Solis'
+		,@InaugurationDate datetime2(7) = '2040-01-06'
+		,@FirstYearInOffice int = 1941
+		,@LastYearInOffice int = 1949
+		,@PartyAffiliation nvarchar(50) = 'Jonny'
+
+  Execute dbo.Presidents_Insert 
+		@Id
+		,@FirstName 
+		,@LastName 
+		,@InaugurationDate 
+		,@FirstYearInOffice 
+		,@LastYearInOffice 
+		,@PartyAffiliation  
+*/
+
+BEGIN
+	
+	INSERT INTO dbo.Presidents
+		(FirstName
+    ,LastName
+    ,InaugurationDate
+		,FirstYearInOffice 
+		,LastYearInOffice
+		,PartyAffiliation) 
+
+  VALUES
+		(@FirstName
+		,@LastName 
+		,@InaugurationDate 
+		,@FirstYearInOffice 
+		,@LastYearInOffice
+		,@PartyAffiliation) 
+
+	SET @Id = SCOPE_IDENTITY()
+
+END
