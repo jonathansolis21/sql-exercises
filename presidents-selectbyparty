@@ -1,0 +1,27 @@
+CREATE PROC [dbo].[Presidents_SelectByParty]
+
+@PartyAffiliation nvarchar(50) 
+
+as 
+
+/*
+	Declare @PartyAffiliation nvarchar(50) = 'Republican'
+
+	Execute dbo.Presidents_SelectByParty @PartyAffiliation
+*/
+
+BEGIN
+
+	SELECT 
+		Id
+		,FirstName
+    ,LastName
+		,FirstYearInOffice
+		,LastYearInOffice
+		,PartyAffiliation
+		,InaugurationDate
+    
+  FROM dbo.Presidents
+  Where PartyAffiliation = @PartyAffiliation
+
+END
