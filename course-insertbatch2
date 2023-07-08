@@ -1,0 +1,55 @@
+CREATE proc [dbo].[Course_InsertBatch_V2]  
+
+	 @batchCourses dbo.CourseV2 READONLY 
+
+as 
+
+/*
+Declare @newCourses dbo.CourseV2
+
+	Insert into @newCourses( Credits, Title, DepId, Id) 
+	values (2, 'Computer Science 1001', 2, 901) 
+	
+	Insert into @newCourses( Credits, Title, DepId, Id) 
+	values (1000, 'Calc 1045', 7, 1045)    
+	
+	Insert into @newCourses( Credits, Title, DepId, Id) 
+	values (10, 'Course v4', 2, 803)    
+	
+	execute dbo.Course_InsertBatch_V2 @newCourses 
+
+	select * from dbo.Course							delete from dbo.Course where CourseId = 904
+*/
+
+BEGIN
+	
+	Declare @dateMod datetime2 = '01/01/1900'  --hardcoded just so we can see it; add columns into udt by declaring at the top 
+
+	Update dbo.Course
+		set Credits = b.Credits
+			, Title = b.Title
+			, DepartmentId = b.DepId
+			, DateModified = @dateMod  -- apparently this doesn't change . 
+
+	From @batchCourses as b
+		inner join dbo.Course as c
+		on c.CourseId = b.Id 
+
+		SET IDENTITY_INSERT dbo.Course  ON 
+
+		Insert into dbo.Course (Credits
+        , Title
+        , DepartmentId
+        , CourseId) 
+		Select n.Credits
+				, n.Title
+				, n.DepId
+				, n.Id
+		from  @batchCourses as n 
+		Where Not Exists ( Select 1
+							from dbo.Course as c
+							where c.CourseId = n.Id ) 
+
+		SET IDENTITY_INSERT sab.Course OFF
+
+END
