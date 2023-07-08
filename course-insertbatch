@@ -1,0 +1,28 @@
+CREATE proc [dbo].[Course_InsertBatch]  
+
+	 @batchCourses dbo.Course READONLY 
+
+as 
+
+/*
+Declare @newCourses dbo.Course
+
+Insert into @newCourses( Credits, Title, DepId) 
+	values (2, 'My great subject', 7) 
+	Insert into @newCourses( Credits, Title, DepId) 
+	values (10, 'CS 1001', 2)    
+	
+	execute dbo.Course_InsertBatch  @newCourses 
+
+	select * from dbo.Course 
+*/
+
+BEGIN
+
+		Insert into dbo.Course (Credits, Title, DepartmentId) --insert coming off a select 
+		Select n.Credits
+				, n.Title
+				, n.DepId
+		from  @batchCourses as n 
+
+END 
