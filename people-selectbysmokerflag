@@ -1,0 +1,26 @@
+CREATE proc [dbo].[People_SelectBySmokerFlag]
+		@SmokerFlag bit
+
+as 
+
+/*
+	Declare @SmokerFlag bit = 1; 
+
+	Execute dbo.[People_SelectBySmokerFlag] @SmokerFlag
+*/
+
+BEGIN
+	
+	SELECT [Id]
+		,[Name]
+		,[Age]
+		,[IsSmoker]
+		,[DateAdded]
+		,[DateModified]
+		,[UserId]
+	FROM [dbo].[People]
+	Where ([IsSmoker] = @SmokerFlag)
+			OR
+			(@SmokerFlag IS NULL AND [IsSmoker] IS NULL)
+
+END
