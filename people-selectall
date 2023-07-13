@@ -1,0 +1,20 @@
+CREATE proc [dbo].[People_SelectAll]
+
+as 
+
+/*
+	Execute dbo.dbo.People_SelectAll
+*/
+
+BEGIN
+
+	SELECT [Id]
+		,[Name]
+		,[Age]
+		,[IsSmoker]
+		,[DateAdded]
+		,[DateModified]
+		,[UserId]
+	FROM [dbo].[People]
+
+END
