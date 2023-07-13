@@ -1,0 +1,51 @@
+CREATE proc [dbo].[People_Update]
+    @PersonName nvarchar(50) 
+		,@Age int
+		,@UserId nvarchar(128) 
+		,@IsASmoker bit
+		,@Id int 
+
+as
+
+/*
+Declare @Id int = 0; 
+
+	Declare @PersonName nvarchar(50) = 'Bill'
+		,@Age int = 25
+		,@UserId nvarchar(128) = '33333'
+		,@IsASmoker bit = null
+
+	Select *
+	From dbo.People
+	Where Id = @Id
+
+Execute dbo.People_Update 
+      @PersonName
+      ,@Age
+      ,@UserId
+      ,@IsASmoker
+      ,@Id 
+
+			Select *
+			From dbo.People
+			Where Id = @Id
+*/
+
+
+BEGIN
+
+	Declare @dateNow datetime2 = GETUTCDATE(); 
+
+	UPDATE [dbo].[People]
+   SET [Name] = @PersonName
+      ,[Age] = @Age
+      ,[IsSmoker] = @IsASmoker
+      ,[DateModified] = @dateNow
+      ,[UserId] = @UserId
+	 WHERE Id = @Id
+
+ Select *
+		From dbo.People
+		Where Id = @Id
+
+END
