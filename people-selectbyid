@@ -1,0 +1,24 @@
+CREATE proc [dbo].[People_SelectById]
+		@Id int
+
+as 
+
+/*
+	Declare @Id int=9; 
+
+	Execute dbo.People_SelectById @Id
+*/
+
+BEGIN
+
+	SELECT [Id]
+		,[Name]
+		,[Age]
+		,[IsSmoker]
+		,[DateAdded]
+		,[DateModified]
+		,[UserId]
+	FROM [dbo].[People]
+	Where Id = @Id
+
+END
