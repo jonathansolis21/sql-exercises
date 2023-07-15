@@ -1,0 +1,49 @@
+CREATE proc [dbo].[People_Insert]
+
+    @PersonName nvarchar(50) 
+    ,@Age int
+    ,@UserId nvarchar(128) 
+    ,@IsASmoker bit
+    ,@Id int OUTPUT
+
+/*
+  Declare @Id int = 0; 
+
+	Declare @PersonName nvarchar(50) = 'Bill'
+		,@Age int = 25
+		,@UserId nvarchar(128) = '33333'
+		,@IsASmoker bit = null
+
+  Execute dbo.People_Insert 
+    @PersonName
+    ,@Age
+    ,@UserId
+    ,@IsASmoker
+    ,@Id OUTPUT
+
+  Select @Id 
+
+  Select *
+  From dbo.People
+  Where Id = @Id
+*/
+
+as
+
+BEGIN
+
+  INSERT INTO [dbo].[People]
+     ([Name]
+     ,[Age]
+     ,[IsSmoker]
+     ,[UserId])
+           
+  VALUES
+    (@PersonName
+    , @Age
+    , @IsASmoker
+    , @UserId)
+
+	SET @Id = SCOPE_IDENTITY()
+	
+END
