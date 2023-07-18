@@ -1,0 +1,25 @@
+CREATE proc [dbo].[People_DeleteByName]
+	@name nvarchar(50)  
+
+as
+
+/*
+	Declare  @name nvarchar(50) = 'Sally'
+
+	Select *
+	From dbo.People
+	Where Name=@name
+
+	Execute dbo.People_DeleteByName @name
+
+	Select *
+	From dbo.People
+	Where Name=@name
+*/
+
+BEGIN
+
+	DELETE FROM [dbo].[People]
+	Where Name=@name
+
+END
