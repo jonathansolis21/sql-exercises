@@ -1,0 +1,25 @@
+CREATE proc [dbo].[People_Delete]
+	@id int  
+
+as
+
+/*
+	Declare @id int = 6
+
+	Select *
+	From dbo.People
+	WHERE Id=@id;
+
+	Execute dbo.People_Delete @id
+
+	Select *
+	From dbo.People
+	WHERE Id=@id;
+*/
+
+BEGIN
+
+	DELETE FROM [dbo].[People]
+	Where Id=@id
+
+END
