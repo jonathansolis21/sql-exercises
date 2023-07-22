@@ -1,0 +1,59 @@
+CREATE PROC [dbo].[Users_Insert]
+		
+		@Id int OUTPUT
+		,@FirstName nvarchar(100)
+		,@LastName nvarchar(100)
+		,@Email nvarchar(100)
+		,@AvatarUrl nvarchar(128)
+		,@TenantId nvarchar(128)
+		,@Password nvarchar(64)
+		,@PasswordConfirm nvarchar(64)
+		
+as
+
+/*
+  Declare @Id int = 0; 
+
+  Declare
+    @FirstName nvarchar(100) = 'Alpha'
+    ,@LastName nvarchar(100) = 'Robot'
+    ,@Email nvarchar(100) = 'alpha@powerrangers.com'
+    ,@AvatarUrl nvarchar(128) = 'www.powerrangers.com/alpha'
+    ,@TenantId nvarchar(128) = '1111M'
+    ,@Password nvarchar(64) = 'Password1!'
+    ,@PasswordConfirm nvarchar(64) = 'Password1!'
+
+  Execute dbo.[Users_Insert] 
+    @Id
+    ,@FirstName
+    ,@LastName
+    ,@Email
+    ,@AvatarUrl
+    ,@TenantId
+    ,@Password
+    ,@PasswordConfirm
+*/
+
+BEGIN
+
+  INSERT INTO [dbo].[Users]
+    (FirstName
+    ,LastName
+    ,Email
+    ,AvatarUrl
+    ,TenantId
+    ,Password
+    ,PasswordConfirm)
+		 
+  VALUES
+    (@FirstName
+    ,@LastName
+    ,@Email
+    ,@AvatarUrl
+    ,@TenantId
+    ,@Password
+    ,@PasswordConfirm)
+
+  SET @Id = SCOPE_IDENTITY()
+
+END
