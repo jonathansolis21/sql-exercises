@@ -1,0 +1,47 @@
+CREATE proc [dbo].[Users_Search_Pagination]
+
+  @PageIndex int
+  ,@PageSize int
+  ,@Query nvarchar(100) 
+
+as
+
+/*
+  DECLARE
+    @PageIndex int = 1
+    , @PageSize int =5
+    , @Query nvarchar(100) = 'Ranger'
+  
+  Execute dbo.Users_Search_Pagination
+  	@PageIndex
+  	,@PageSize
+  	,@Query
+*/
+
+BEGIN
+
+  Declare @offset int = @PageIndex * @PageSize     --why isn't it just index? why also page size? 
+
+  SELECT  
+    Id
+    , FirstName
+    , LastName
+    , Email
+    , AvatarUrl
+    , TenantId
+    , Password
+    , PasswordConfirm
+    , DateCreated
+    , DateModified
+    , TotalCount = COUNT(1) OVER()   
+  FROM [dbo].[Users]
+
+  WHERE (FirstName LIKE '%' + @Query + '%' OR
+		LastName LIKE '%' + @Query + '%')
+
+	ORDER BY Id 
+
+	OFFSET @Offset Rows
+	Fetch Next @PageSize Rows ONLY
+
+END
