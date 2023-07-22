@@ -1,0 +1,30 @@
+CREATE proc [dbo].[Users_Pagination]
+
+	@PageIndex int 
+	,@PageSize int
+
+AS
+
+BEGIN
+
+  Declare @offset int = @PageIndex * @PageSize 
+
+  SELECT 
+		[Id]
+		,FirstName
+		, LastName
+		, Email
+		, AvatarUrl
+		, TenantId
+		, Password
+		, PasswordConfirm
+		,[DateCreated]
+		,[DateModified]
+		, TotalCount = COUNT(1) OVER() 
+		FROM    dbo.Users 
+        ORDER BY Id
+
+	OFFSET @offSet Rows
+	Fetch Next @PageSize Rows ONLY
+
+END
