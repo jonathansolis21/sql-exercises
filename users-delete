@@ -1,0 +1,28 @@
+CREATE proc [dbo].[Users_Delete]
+
+	@Id int  
+
+as
+
+/*
+	Declare @Id int = 5
+
+	Select *
+	From dbo.Users
+	Where Id=@Id;
+
+	Execute dbo.Users_Delete @Id
+
+	Select *
+	From dbo.Users
+	Where Id=@Id;
+
+*/
+
+BEGIN
+
+	DELETE FROM [dbo].[Users]
+	Where Id=@Id
+
+
+END
