@@ -1,0 +1,24 @@
+CREATE proc [dbo].[Users_SelectAll]
+
+as 
+
+/*
+	Execute dbo.Users_SelectAll
+*/
+
+BEGIN
+	
+	SELECT [Id]
+		,FirstName
+		,LastName
+		,Email
+		,AvatarUrl
+		,TenantId
+		,Password
+		,PasswordConfirm
+		,[DateCreated]
+		,[DateModified]
+
+	FROM [dbo].[Users]
+
+END
