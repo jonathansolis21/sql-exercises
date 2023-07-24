@@ -1,0 +1,28 @@
+CREATE proc [dbo].[Users_SelectById]
+		
+  @Id int
+
+as 
+
+/*
+	Declare @Id int=542; 
+
+	Execute dbo.Users_SelectById @Id
+*/
+
+BEGIN
+
+	SELECT Id
+		,FirstName
+    ,LastName
+		,Email
+		,AvatarUrl
+		,TenantId
+    ,Password
+		,PasswordConfirm
+		,DateCreated
+		,DateModified
+	FROM [dbo].[Users]
+	Where Id = @Id
+
+END
