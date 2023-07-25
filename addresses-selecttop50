@@ -1,0 +1,25 @@
+Create proc [dbo].[Addresses_SelectTop50]
+
+/*
+
+	Execute [dbo].[Addresses_SelectTop50]
+
+*/
+
+as
+BEGIN
+
+	SELECT top 50 
+	    [Id]
+		  ,[LineOne]
+		  ,[SuiteNumber]
+		  ,[City]
+		  ,[State]
+		  ,[PostalCode]
+		  ,[IsActive]
+		  ,[Lat]
+		  ,[Long]
+	  FROM [dbo].[Addresses]
+	  Order By NEWID()
+
+END
