@@ -1,0 +1,27 @@
+Create proc [dbo].[Addresses_SelectById]
+			@Id int
+/*
+
+	declare @Id int = 10
+	Execute [dbo].[Addresses_SelectById] @Id
+
+*/
+
+as
+
+BEGIN
+
+	SELECT 
+	    [Id]
+		  ,[LineOne]
+		  ,[SuiteNumber]
+		  ,[City]
+		  ,[State]
+		  ,[PostalCode]
+		  ,[IsActive]
+		  ,[Lat]
+		  ,[Long]
+  FROM [dbo].[Sabio_Addresses]
+  Where Id = @Id
+
+END
