@@ -1,0 +1,27 @@
+Create proc [dbo].[Addresses_Update]
+			@Id int,
+			@LineOne nvarchar(50),
+			@SuiteNumber int,
+			@City nvarchar(50),
+			@State nvarchar(50),
+			@PostalCode nvarchar(50),
+			@IsActive bit,
+			@Lat float,
+			@Long float
+as
+
+BEGIN
+
+	UPDATE [dbo].[Addresses]
+	   SET [LineOne]		= @LineOne
+		  ,[SuiteNumber]	= @SuiteNumber
+		  ,[City]			= @City
+		  ,[State]			= @State
+		  ,[PostalCode]		= @PostalCode
+		  ,[IsActive]		= @IsActive
+		  ,[Lat]			= @Lat
+		  ,[Long]			= @Long
+	 WHERE Id = @Id
+
+
+END
