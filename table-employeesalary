@@ -1,0 +1,5 @@
+CREATE TABLE [dbo].[EmployeeSalary](
+	[EmployeeID] [int] NULL,
+	[JobTitle] [varchar](50) NULL,
+	[Salary] [int] NULL
+) ON [PRIMARY]
