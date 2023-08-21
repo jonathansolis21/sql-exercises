@@ -1,0 +1,5 @@
+CREATE TABLE [sab].[StudentProfiles](
+	[StudentId] [int] NOT NULL,
+	[EnrollDate] [datetime] NOT NULL
+) ON [PRIMARY]
+GO
