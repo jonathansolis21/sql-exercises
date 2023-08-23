@@ -1,0 +1,11 @@
+CREATE TABLE [sab].[OnsiteCourse](
+	[CourseId] [int] NOT NULL,
+	[Location] [nvarchar](50) NOT NULL,
+	[Days] [nvarchar](50) NOT NULL,
+	[Time] [smalldatetime] NOT NULL,
+ CONSTRAINT [PK_OnsiteCourse] PRIMARY KEY CLUSTERED 
+(
+	[CourseId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
