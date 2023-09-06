@@ -52,4 +52,4 @@ BEGIN
 
 		SET IDENTITY_INSERT sab.Course OFF
 
-END  
+END
