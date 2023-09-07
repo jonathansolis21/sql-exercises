@@ -1,10 +1,8 @@
 Create proc [dbo].[Addresses_DeleteById]
 			@Id int
 /*
-
 	declare @Id int = 10
 	Execute [dbo].[Addresses_DeleteById] @Id
-
 */
 
 as
