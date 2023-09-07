@@ -1,15 +1,18 @@
 Create proc [dbo].[Addresses_DeleteById]
-			@Id int
+
+	@Id int
+
 /*
 	declare @Id int = 10
 	Execute [dbo].[Addresses_DeleteById] @Id
 */
 
 as
+
 BEGIN
 
-	  DELETE
-	  FROM [dbo].[Addresses]
-	  Where Id = @Id
+	DELETE
+	FROM [dbo].[Addresses]
+	Where Id = @Id
 
 END
