@@ -37,6 +37,6 @@ BEGIN
 	FROM [dbo].[Friends] as f 
 	Where Id = @Id
 
-END 
+END
 
 
