@@ -7,12 +7,12 @@ as
 /*
 DECLARE @batchSkills SkillsUdt  
 
-		INSERT into @batchSkills ( SkillName ) 
-		Values ( 'Kicking' )
-		INSERT into @batchSkills ( SkillName ) 
-		Values ( 'Punching' )
-		INSERT into @batchSkills ( SkillName ) 
-		Values ( 'Elbowing' )
+		INSERT into @batchSkills (SkillName) 
+		Values ('Kicking')
+		INSERT into @batchSkills (SkillName) 
+		Values ('Punching')
+		INSERT into @batchSkills (SkillName) 
+		Values ('Elbowing')
 
 	Execute dbo.Skills_BatchInsert
 		@batchSkills
