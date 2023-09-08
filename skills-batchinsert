@@ -18,9 +18,7 @@ DECLARE @batchSkills SkillsUdt
 		@batchSkills
 */
 
-BEGIN
-
---DECLARE @Skills TABLE (SkillTableId int) 
+BEGIN 
 
 	INSERT INTO Skills (SkillName)
 	
