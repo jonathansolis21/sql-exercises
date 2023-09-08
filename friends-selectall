@@ -33,7 +33,7 @@ BEGIN
 	
 	FROM [dbo].[Friends] as f 
 
-END
+END 
 
 
 
