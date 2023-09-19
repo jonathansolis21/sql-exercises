@@ -25,4 +25,4 @@ BEGIN
 				, n.DepId
 		from  @batchCourses as n 
 
-END 
+END
