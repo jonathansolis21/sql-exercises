@@ -17,7 +17,7 @@ Insert into @newCourses( Credits, Title, DepId)
 	select * from dbo.Course 
 */
 
-BEGIN
+BEGIN 
 
 		Insert into dbo.Course (Credits, Title, DepartmentId) --insert coming off a select 
 		Select n.Credits
